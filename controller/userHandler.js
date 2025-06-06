@@ -34,7 +34,8 @@ const loginHandler=TryCatcher(async(req,res,next)=>{
 })
 
 const getProfile=TryCatcher(async(req,res,next)=>{
-    res.json(req.user);
+    const user=await User.findById(req.user).select('-password');
+    res.json(user);
 })
 
 module.exports={registerHandler,loginHandler,getProfile}
