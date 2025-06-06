@@ -1,6 +1,6 @@
-import User from "../model/User.js";
-import { ErrorHandler, TryCatcher } from "../utility/errorHandler.js";
-import { generateToken } from "../utility/feature.js";
+const User=require("../model/User.js");
+const { ErrorHandler, TryCatcher } =require("../utility/errorHandler.js");
+const { generateToken, cookieOption }=require("../utility/feature.js");
 
 
 const registerHandler=TryCatcher(async(req,res,next)=>{
@@ -11,9 +11,14 @@ const registerHandler=TryCatcher(async(req,res,next)=>{
         return next(new ErrorHandler('Email Already Exists',400));
     }
     user=await User.create({name,email,password});
+
+    await user.save();
+
     
-    res.status(201).json({
-      token: generateToken(user._id),
+    const token = generateToken(user._id);
+
+    res.status(201).cookie('token',token,cookieOption).json({
+      message:`Successfully created the Account`,
       user: { name: user.name, email: user.email }
     })
 
@@ -26,10 +31,13 @@ const loginHandler=TryCatcher(async(req,res,next)=>{
     if (!user || !(await user.comparePassword(password))){
         return next(new ErrorHandler("Invalid credentials",401))
     }
-    res.json({
-      token: generateToken(user._id),
-      user: { name: user.name, email: user.email }
-    });
+
+    const token = generateToken(user._id);
+
+
+    res.status(200).cookie('token',token,cookieOption).json({
+        message:`Welcome Back ${user.name}`
+    })
 
 })
 

@@ -16,7 +16,9 @@ const savePreferences=TryCatcher(async(req,res,next)=>{
         layout
     });
 
-    res.status(201).json(pref)
+    res.status(201).json({
+        message:'Preferences saved Succesfully',
+        pref})
 })
 
 

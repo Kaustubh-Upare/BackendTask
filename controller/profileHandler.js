@@ -1,10 +1,12 @@
-import User from "../model/User";
-import { TryCatcher } from "../utility/errorHandler";
+const User= require("../model/User");
+const{ TryCatcher }=require("../utility/errorHandler");
 
 
 const updateProfile=TryCatcher(async(req,res,next)=>{
     const { name, email } = req.body;
-    const user = await User.findById(req.user._id);
+    const user = await User.findById(req.user);
+
+    
 
     user.name=name || user.name;
     user.email=email || user.email;
