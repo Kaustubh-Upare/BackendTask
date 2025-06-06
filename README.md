@@ -46,14 +46,17 @@ Follow these steps to set up the project locally:
 ```bash
 git clone https://github.com/Kaustubh-Upare/BackendTask.git
 cd BackendTask
-2. 📥 Install dependencies
-bash
+```
+
+### 2. 📥 Install dependencies
+```bash
 Copy
 Edit
 npm install
-3. ⚙️ Configure environment variables
+```
+### 3. ⚙️ Configure environment variables
 Create a .env file in the root directory and add:
-
+```
 env
 Copy
 Edit
@@ -61,17 +64,19 @@ PORT=5000
 MONGO_URI=your_mongodb_atlas_uri
 JWT_SECRET=your_jwt_secret_key
 🔐 Replace your_mongodb_atlas_uri and your_jwt_secret_key with your actual credentials.
+```
 
-4. ▶️ Start the development server
-bash
+### 4. ▶️ Start the development server
+```bash
 Copy
 Edit
 npm start
+```
 The server will start at:
 🌐 http://localhost:3000
 
-📂 Folder Structure
-bash
+### 📂 Folder Structure
+```bash
 Copy
 Edit
 📁 BackendTask
